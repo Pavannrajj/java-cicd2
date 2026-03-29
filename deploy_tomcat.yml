@@ -1,0 +1,26 @@
+---
+- hosts: tomcat
+  become: yes
+  vars:
+    tomcat_webapps: /opt/tomcat/webapps
+    war_file: "java-frontend-app-{{ BUILD_NUMBER }}.war"
+
+  tasks:
+    - name: Stop Tomcat
+      shell: /opt/tomcat/bin/shutdown.sh
+      ignore_errors: yes
+
+    - name: Remove old WAR
+      file:
+        path: "{{ tomcat_webapps }}/java-frontend-app*.war"
+        state: absent
+      ignore_errors: yes
+
+    - name: Copy new WAR to Tomcat
+      copy:
+        src: "{{ war_file }}"
+        dest: "{{ tomcat_webapps }}/java-frontend-app.war"
+        mode: '0644'
+
+    - name: Start Tomcat
+      shell: /opt/tomcat/bin/startup.sh
