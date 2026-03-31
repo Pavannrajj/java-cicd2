@@ -1,0 +1,13 @@
+yamlapiVersion: v1
+kind: Service
+metadata:
+  name: java-frontend-svc
+  namespace: default
+spec:
+  type: LoadBalancer        # Creates an AWS ALB automatically
+  selector:
+    app: java-frontend-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
