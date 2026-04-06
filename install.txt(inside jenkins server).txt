@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+echo "Updating system..."
+sudo apt update -y
+
+echo "Installing dependencies..."
+sudo apt install -y curl unzip apt-transport-https ca-certificates gnupg lsb-release
+
+# ---------------- AWS CLI ----------------
+echo "Installing AWS CLI..."
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+
+# ---------------- kubectl ----------------
+echo "Installing kubectl..."
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+kubectl version --client
+
+# ---------------- eksctl ----------------
+echo "Installing eksctl..."
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+echo "All tools installed successfully!"
