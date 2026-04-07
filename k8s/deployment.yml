@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: java-frontend-app
-          image: 995597568446.dkr.ecr.ap-south-1.amazonaws.com/ci-cd:BUILD_NUMBER_PLACEHOLDER
+          image: 995597568446.dkr.ecr.us-east-1.amazonaws.com/ci-cd:BUILD_NUMBER_PLACEHOLDER
           ports:
             - containerPort: 8080
           resources:

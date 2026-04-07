@@ -4,20 +4,19 @@ pipeline {
         maven 'maven'
     }
     environment {
-        NEXUS_URL      = 'http://43.205.114.147:8081'
-        NEXUS_REPO     = 'java-app'
+        NEXUS_URL      = 'http://65.1.94.102:8081'
+        NEXUS_REPO     = 'frontend-repo'
         GROUP_ID       = 'com.example'
         ARTIFACT_ID    = 'java-frontend-app'
         VERSION        = '1.0.0'
-        TOMCAT_HOST    = 'ubuntu@15.207.111.167'
+        TOMCAT_HOST    = 'ubuntu@65.1.94.102'
         TOMCAT_WEBAPPS = '/opt/tomcat/webapps/'
     }
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    credentialsId: 'git_id',
-                    url: 'https://github.com/vtricksshiva/java-cicd.git'
+                    url: ' https://github.com/Pavannrajj/java-cicd2.git'
             }
         }
 
@@ -47,7 +46,7 @@ pipeline {
         stage('Publish WAR to Nexus') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'nexus_server',
+                    credentialsId: 'nexus-id',
                     usernameVariable: 'NEXUS_USER',
                     passwordVariable: 'NEXUS_PASS'
                 )]) {
@@ -70,7 +69,7 @@ pipeline {
 
         stage('Deploy to Tomcat via SSH') {
             steps {
-                sshagent(['ssh-key-jenkins']) {
+                sshagent(['ssh-key']) {
                     sh '''
                         WAR_FILE=$(ls target/*.war | head -n 1)
                         test -n "$WAR_FILE" || { echo "WAR file not found"; exit 1; }

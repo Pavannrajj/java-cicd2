@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        AWS_REGION   = 'ap-south-1'
-        ECR_REPO     = '995597568446.dkr.ecr.ap-south-1.amazonaws.com/ci-cd'
-        EKS_CLUSTER  = 'demo-cluster-pa1'
+        AWS_REGION   = 'us-east-1'
+        ECR_REPO     = '995597568446.dkr.ecr.us-east-1.amazonaws.com/ci-cd'
+        EKS_CLUSTER  = 'demo-cluster'
     }
     tools {
         maven 'maven'
