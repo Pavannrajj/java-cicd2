@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        AWS_REGION   = 'us-east-1'
-        ECR_REPO     = '995597568446.dkr.ecr.us-east-1.amazonaws.com/ci-cd'
+        AWS_REGION   = 'ap-south-1'
+        ECR_REPO     = '995597568446.dkr.ecr.ap-south-1.amazonaws.com/ci-cd'
         EKS_CLUSTER  = 'demo-cluster'
     }
     tools {
@@ -32,7 +32,7 @@ pipeline {
         // stage('Push Binaries to Nexus') {
         //     steps {
         //         script {
-        //             withCredentials([usernamePassword(credentialsId: 'nexus-cred', passwordVariable: 'pass', usernameVariable: 'user')]) {
+        //             withCredentials([usernamePassword(credentialsId: 'nexus-id', passwordVariable: 'pass', usernameVariable: 'user')]) {
         //                 sh """
         //                 curl -u ${user}:${pass} -T java-frontend-app.war \
         //                 "http://13.206.84.246:8081/repository/java-app/java-frontend-app-${BUILD_NUMBER}.war"
