@@ -69,10 +69,7 @@ pipeline {
 
         stage('Deploy to Tomcat via SSH') {
             steps {
-                withCredentials([sshUserPrivateKey(
-    credentialsId: 'ssh-key',
-    keyFileVariable: 'SSH_KEY'
-)]) {
+                sshagent(['ssh-key']) {
                     sh '''
                         WAR_FILE=$(ls target/*.war | head -n 1)
                         test -n "$WAR_FILE" || { echo "WAR file not found"; exit 1; }
