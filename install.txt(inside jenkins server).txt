@@ -29,3 +29,10 @@ sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 
 echo "All tools installed successfully!"
+
+# ---------------- docker ----------------
+sudo apt install docker.io -y 
+sudo usermod -aG docker ubuntu
+sudo usermod -aG docker jenkins
+sudo systemctl restart docker
+sudo systemctl restart jenkins

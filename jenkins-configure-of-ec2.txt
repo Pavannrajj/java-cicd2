@@ -1,0 +1,4 @@
+sudo su - jenkins
+aws eks update-kubeconfig --region us-east-1 --name demo-cluster-pa1
+aws configure
+kubectl get nodes
